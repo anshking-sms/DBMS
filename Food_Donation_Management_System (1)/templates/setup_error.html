@@ -1,0 +1,4 @@
+{% extends "base.html" %}
+{% block title %}Setup required{% endblock %}
+{% block heading %}Database setup required{% endblock %}
+{% block content %}<section class="panel"><h3>Could not connect to MySQL</h3><p>Check that MySQL Server is running, then execute <code>schema.sql</code> and verify your DB_PASSWORD setting.</p><details><summary>Technical detail</summary><pre>{{ error }}</pre></details></section>{% endblock %}

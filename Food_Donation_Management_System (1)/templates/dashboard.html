@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block heading %}Dashboard{% endblock %}
+{% block content %}
+<section class="welcome">
+  <div><span class="eyebrow light">FOOD WASTE TO FOOD SUPPORT</span><h2>Good food deserves<br>a second chance.</h2><p>Track donations and help connect surplus food with people who need it.</p><a class="btn btn-light" href="{{ url_for('donations') }}">Manage donations →</a></div>
+  <div class="welcome-art" aria-hidden="true">🥗</div>
+</section>
+<section class="stats">
+  <article class="stat"><div class="stat-icon green">♧</div><span>Total donations</span><strong>{{ stats.donations }}</strong><small>All donation records</small></article>
+  <article class="stat"><div class="stat-icon orange">◷</div><span>Available food</span><strong>{{ stats.available }}</strong><small>Awaiting distribution</small></article>
+  <article class="stat"><div class="stat-icon blue">✓</div><span>Distributed</span><strong>{{ stats.distributed }}</strong><small>Marked as distributed</small></article>
+  <article class="stat"><div class="stat-icon purple">♙</div><span>Recipients</span><strong>{{ stats.recipients }}</strong><small>Registered recipients</small></article>
+</section>
+<section class="panel">
+  <div class="panel-head"><div><h3>Recent donations</h3><p>Latest records saved in MySQL</p></div><a class="btn btn-primary" href="{{ url_for('donations') }}">+ Add donation</a></div>
+  <div class="table-wrap"><table><thead><tr><th>Food item</th><th>Donor</th><th>Quantity</th><th>Expiry</th><th>Status</th></tr></thead><tbody>
+  {% for d in recent %}<tr><td><strong>{{ d.food_name }}</strong><small class="cell-sub">Donation #{{ d.donation_id }}</small></td><td>{{ d.donor_name }}</td><td>{{ d.quantity }} {{ d.unit }}</td><td>{{ d.expiry_time or 'Not set' }}</td><td><span class="status {{ d.status|lower }}">{{ d.status }}</span></td></tr>
+  {% else %}<tr><td colspan="5" class="empty">No donations yet. Add a donor and record a donation to get started.</td></tr>{% endfor %}
+  </tbody></table></div>
+</section>
+{% endblock %}

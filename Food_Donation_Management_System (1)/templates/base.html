@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}FoodBridge{% endblock %} | Food Donation Manager</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="brand"><span class="brand-icon">♡</span><div><strong>FoodBridge</strong><small>Donation Manager</small></div></div>
+    <nav>
+      <a href="{{ url_for('dashboard') }}">▦ &nbsp; Dashboard</a>
+      <a href="{{ url_for('donors') }}">♧ &nbsp; Donors</a>
+      <a href="{{ url_for('recipients') }}">♙ &nbsp; Recipients</a>
+      <a href="{{ url_for('donations') }}">♧ &nbsp; Food Donations</a>
+    </nav>
+    <div class="sidebar-note">Reduce waste.<br>Share food. Build community.</div>
+  </aside>
+  <main class="main">
+    <header class="topbar"><div><span class="eyebrow">COMMUNITY IMPACT</span><h1>{% block heading %}Dashboard{% endblock %}</h1></div><span class="top-pill">● System ready</span></header>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}<section class="flash-wrap">{% for category, message in messages %}<div class="flash {{ category }}">{{ message }}</div>{% endfor %}</section>{% endif %}
+    {% endwith %}
+    {% block content %}{% endblock %}
+    <footer>FoodBridge · DBMS TAE-2 Mini-Project · Flask + MySQL</footer>
+  </main>
+</body>
+</html>
